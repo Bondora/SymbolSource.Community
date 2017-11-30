@@ -33,17 +33,17 @@ namespace SymbolSource.Server.Basic
 
         private string GetVisualStudioUrl()
         {
-            return GetAbsoluteUrl(Url.Content("~/WinDbg/pdb"));
+            return GetAbsoluteUrl(Url.Content("~/pdb/Public"));
         }
 
         private string GetNuGetPushUrl()
         {
-            return GetAbsoluteUrl(Url.Content("~/NuGet"));
+            return GetAbsoluteUrl(Url.Content("~/Public/NuGet"));
         }
 
         private string GetNuGetFeedUrl()
         {
-            return GetAbsoluteUrl(Url.Content("~/NuGet/FeedService.mvc"));
+            return GetAbsoluteUrl(Url.Content("~/Public/NuGet/FeedService.mvc"));
         }
 
         public ActionResult Index()
@@ -61,7 +61,7 @@ namespace SymbolSource.Server.Basic
             return View(new DiagnosticsViewModel
             {
                 SrcSrvPathTest = Directory.Exists(ConfigurationManager.AppSettings["SrcSrvPath"]) ? "OK" : "Directory not found",
-                NuGetSmokeTest = InlineTest(Url.Action("SmokeTest", new { url = Url.Content("~/NuGet/FeedService.mvc") })),
+                NuGetSmokeTest = InlineTest(Url.Action("SmokeTest", new { url = Url.Content("~/Public/NuGet/FeedService.mvc") })),
                 NuGetPushTest = InlineTest(Url.Action("NuGetPushTest")),
                 NuGetFeedTest = InlineTest(Url.Action("NuGetFeedTest")),
             });
