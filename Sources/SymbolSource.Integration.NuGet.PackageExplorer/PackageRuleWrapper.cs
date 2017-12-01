@@ -16,7 +16,7 @@ namespace SymbolSource.Integration.NuGet.PackageExplorer
             this.rule = rule;
         }
 
-        public IEnumerable<NuGetPackageExplorer.Types.PackageIssue> Validate(global::NuGet.IPackage package, string packageFileName)
+        public IEnumerable<NuGetPackageExplorer.Types.PackageIssue> Validate(global::NuGetPe.IPackage package, string packageFileName)
         {
             return rule(new PackageWrapper(package, packageFileName)).Select(pi => pi.ToCommandLine());
         }
@@ -24,10 +24,10 @@ namespace SymbolSource.Integration.NuGet.PackageExplorer
 
     public class PackageWrapper : IPackage
     {
-        private readonly global::NuGet.IPackage package;
+        private readonly global::NuGetPe.IPackage package;
         private readonly string packageFileName;
 
-        public PackageWrapper(global::NuGet.IPackage package, string packageFileName)
+        public PackageWrapper(global::NuGetPe.IPackage package, string packageFileName)
         {
             this.package = package;
             this.packageFileName = packageFileName;
@@ -46,9 +46,9 @@ namespace SymbolSource.Integration.NuGet.PackageExplorer
 
     public class PackageFileWrapper : IPackageFile
     {
-        private readonly global::NuGet.IPackageFile file;
+        private readonly global::NuGetPe.IPackageFile file;
 
-        public PackageFileWrapper(global::NuGet.IPackageFile file)
+        public PackageFileWrapper(global::NuGetPe.IPackageFile file)
         {
             this.file = file;
         }

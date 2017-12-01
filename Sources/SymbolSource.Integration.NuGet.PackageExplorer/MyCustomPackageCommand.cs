@@ -7,7 +7,7 @@ namespace SymbolSource.Integration.NuGet.PackageExplorer
     [PackageCommandMetadata("My custom command")]
     internal class MyCustomPackageCommand : IPackageCommand 
     {
-        public void Execute(global::NuGet.IPackage package, string packagePath)
+        public void Execute(global::NuGetPe.IPackage package, string packagePath)
         {
             throw new NotImplementedException();
         }
