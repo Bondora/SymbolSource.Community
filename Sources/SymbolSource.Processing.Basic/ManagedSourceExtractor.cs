@@ -20,9 +20,11 @@ namespace SymbolSource.Processing.Basic
 
         public IList<string> ReadSources(Stream peStream, Stream pdbStream)
         {
+            Dictionary<uint, PdbTokenLine> tokenToSourceMapping;
+
             var result = new List<string>();
 
-            foreach (var obj1 in PdbFile.LoadFunctions(pdbStream, false))
+            foreach (var obj1 in PdbFile.LoadFunctions(pdbStream, out tokenToSourceMapping))
                 if (obj1.lines != null)
                     foreach (var obj2 in obj1.lines)
                         result.Add(obj2.file.name);
