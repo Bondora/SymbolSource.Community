@@ -7,12 +7,12 @@ namespace SymbolSource.Server.Basic
     {
         public string DataPath
         {
-            get { return HttpContext.Current.Server.MapPath("~/Data"); }
+            get { return GetPath("DataDir", "~/Data"); }
         }
 
         public string IndexPath
         {
-            get { return HttpContext.Current.Server.MapPath("~/Index"); }
+            get { return GetPath("IndexDir", "~/Index"); }
         }
 
         public string RemotePath
@@ -21,6 +21,12 @@ namespace SymbolSource.Server.Basic
             {
                 return HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + HttpContext.Current.Request.ApplicationPath.TrimEnd('/') + "/Data";
             }
+        }
+
+        private static string GetPath(string resource, string defaultPath)
+        {
+            var path = System.Configuration.ConfigurationManager.AppSettings.Get(resource) ?? defaultPath;
+            return path.StartsWith("~/") ? HttpContext.Current.Server.MapPath(path) : path;
         }
     }
 }
